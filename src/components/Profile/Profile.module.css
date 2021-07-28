@@ -1,0 +1,36 @@
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed rgb(130, 212, 7);
+    border-radius: 50px;
+    margin-right: 50px;
+}
+
+.name {
+    font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.wallpaper {
+    height: 100px;
+    opacity: .9;
+    background: url('./images/images.jpg') 0 0 repeat;
+    width: 100%;
+}
+
+.profileWrapper {
+    flex-basis: 80%;
+}
+
+.profile_info {
+    font-family: Source Sans Pro, sans-serif;
+    letter-spacing: 1px;
+}
+
+.profile__line {
+    height: 2px;
+    background: rgb(130, 212, 7);
+}

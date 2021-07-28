@@ -1,0 +1,22 @@
+.navbarWrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-image:
+      linear-gradient( #FEC64F 30%, #008C4D 70%, #375A44 100%);
+  }
+
+.navbar__item {
+    padding: 35px;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    transition: .2s;
+    color: white;
+}
+
+.navbar__item:hover {
+    background: #269B25;
+  }
+  
+

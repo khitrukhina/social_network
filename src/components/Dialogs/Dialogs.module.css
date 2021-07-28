@@ -1,0 +1,20 @@
+.dialogsWrapper {
+    display: flex;
+    padding: 20px;
+    flex-basis: 80%;
+}
+
+.dialogItems {
+    flex-basis: 20%;
+    text-align: center;
+    border-right: 2px dashed rgb(130, 212, 7);
+}
+
+.message {
+    flex-basis: 40%;
+    padding: 0 10px;
+}
+.dialogsTextArea {
+    display: flex;
+    flex-direction: column;
+}

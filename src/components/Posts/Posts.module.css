@@ -1,0 +1,36 @@
+.posts__title {
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.posts__input {
+    flex-basis: 40%;
+    margin-right: 20px;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border: 1.5px dashed rgb(130, 212, 7);
+    border-radius: 50px;
+}
+
+.postWrapper {
+    display: flex;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+
+.post__text {
+    flex-basis: 90%;
+}
+
+.post__likes {
+    margin-left: 5px;
+}

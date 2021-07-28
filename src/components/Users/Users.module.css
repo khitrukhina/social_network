@@ -1,0 +1,50 @@
+.users {
+    flex-basis: 80%;
+    padding: 20px;
+}
+
+.user {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.user__avatarBlock {
+    flex-basis: 20%;
+    text-align: center;
+}
+
+.user__avatarBlock_avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.user__infoBlock {
+    display: flex;
+    justify-content: space-evenly;
+    flex-basis: 50%;
+    margin: 20px;
+    border: 2px dashed black;
+    border-radius: 9px;
+}
+
+.user__info {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.user__info_location {
+    align-self: center;
+}
+
+
+.user__avatarBlock_button button {
+    margin-top: 5px;
+    border: 2px solid rgb(49, 228, 49);
+    border-radius: 15px;
+    padding: 5px 25px;
+    background: #90fa75;
+    cursor: pointer;
+}
