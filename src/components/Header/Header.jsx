@@ -1,7 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Preloader } from '../common/Preloader/Preloader';
 
 const styles = {
   div: {
+    display: 'flex',
+    alignItems: 'center',
     height: '70px',
     backgroundImage:
       'linear-gradient(40deg, #FEC64F 30%, #008C4D 70%, #375A44 100%)',
@@ -13,9 +17,15 @@ const styles = {
   a: {
     marginLeft: '4%',
   },
+  login: {
+    flexGrow: 1,
+    textAlign: 'right',
+    marginRight: '4%',
+    color: 'white',
+  },
 };
 
-export const Header = () => {
+export const Header = (props) => {
   return (
     <div style={styles.div}>
       <a href="/" style={styles.a}>
@@ -25,6 +35,13 @@ export const Header = () => {
           alt=""
         />
       </a>
+      <div style={styles.login}>
+        {props.auth.isAuth ? (
+          <span>{props.auth.login} </span>
+        ) : (
+          <NavLink to="/login">LOGIN</NavLink>
+        )}
+      </div>
     </div>
   );
 };

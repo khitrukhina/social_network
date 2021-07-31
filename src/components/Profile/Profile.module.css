@@ -14,6 +14,15 @@
   font-size: 25px;
 }
 
+.green_check {
+    color: green;
+}
+
+.red_check {
+    color: red;
+}
+
+
 .wallpaper {
     height: 100px;
     opacity: .9;

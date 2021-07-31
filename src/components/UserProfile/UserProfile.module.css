@@ -1,0 +1,18 @@
+.green_check {
+    color: green;
+}
+
+.red_check {
+    color: red;
+}
+
+.name {
+    font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.profile{
+    padding: 20px;
+}
