@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { ProfileContainerComponent } from './components/Profile/ProfileContainer';
-import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';

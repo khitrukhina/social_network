@@ -14,9 +14,10 @@ class UsersContainerComponent extends React.Component {
     this.props.getUserThunk(this.props.currentPage, this.props.pageSize);
   }
   render() {
-    let pagesCount = Math.ceil(
-      this.props.totalUsersCount / this.props.pageSize
-    );
+    let pagesCount = 10;
+    // let pagesCount = Math.ceil(
+    //   this.props.totalUsersCount / this.props.pageSize
+    // );
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
       pages.push(i);

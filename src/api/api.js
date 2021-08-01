@@ -31,4 +31,15 @@ export const apiFunctions = {
       return response.data;
     });
   },
+  setStatus: (status) => {
+    return api.put('profile/status', { status: status }).then((response) => {
+      console.log(response);
+      return response;
+    });
+  },
+  getStatus: (id) => {
+    return api.get(`profile/status/${id}`).then((response) => {
+      return response;
+    });
+  },
 };

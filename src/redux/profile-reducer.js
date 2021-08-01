@@ -5,6 +5,7 @@ const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING;';
 const SET_MY_PROFILE = 'SET_MY_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
   posts: [
@@ -14,6 +15,7 @@ let initialState = {
   profile: null,
   myProfile: null,
   isFetching: false,
+  status: '',
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -48,6 +50,13 @@ export const profileReducer = (state = initialState, action) => {
         myProfile: { ...action.profile },
       };
 
+    case SET_STATUS:
+      debugger;
+      return {
+        ...state,
+        status: action.status,
+      };
+
     default:
       return state;
   }
@@ -74,6 +83,11 @@ const toggleIsFetchingAC = (isFetching) => ({
   isFetching,
 });
 
+const setStatusAC = (status) => ({
+  type: SET_STATUS,
+  status,
+});
+
 export const setProfileThunk = (id) => (dispatch) => {
   dispatch(toggleIsFetchingAC(true));
   apiFunctions.getProfile(id).then((profile) => {
@@ -87,5 +101,21 @@ export const setMyProfileThunk = (id) => (dispatch) => {
   apiFunctions.getProfile(id).then((profile) => {
     dispatch(toggleIsFetchingAC(false));
     dispatch(setMyProfileAC(profile));
+  });
+};
+
+export const getStatusThunk = (id) => (dispatch) => {
+  apiFunctions.getStatus(id).then((response) => {
+    console.log(response);
+    dispatch(setStatusAC(response.data));
+  });
+};
+
+export const setStatusThunk = (status) => (dispatch) => {
+  console.log(status);
+  apiFunctions.setStatus(status).then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(setStatusAC(status));
+    }
   });
 };
