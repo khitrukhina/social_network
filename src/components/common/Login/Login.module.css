@@ -1,0 +1,33 @@
+.loginPage {
+    margin: 20px auto;
+}
+
+.formWrapper {
+    margin: 20px auto;
+    text-align: center;
+    font-family: Source Sans Pro, sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-family: Source Sans Pro, sans-serif;
+    letter-spacing: 2px;
+}
+
+.form__item {
+    padding: 5px 15px;
+    margin : 10px 0;
+    border-radius: 8px;
+}
+
+.form__button {
+    border: 2px solid rgb(49, 228, 49);
+    border-radius: 15px;
+    padding: 5px 20px;
+    background: #90fa75;
+    cursor: pointer;
+}
+
+.form__preloader {
+    margin: 10px auto;
+}

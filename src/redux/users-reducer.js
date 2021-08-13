@@ -81,43 +81,39 @@ const toggleIsFetchingAC = (isFetching) => ({
 });
 
 export const getUserThunk = (currentPage, pageSize) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
-    apiFunctions.getUsers(currentPage, pageSize).then((data) => {
-      dispatch(toggleIsFetchingAC(false));
-      dispatch(setUsersAC(data.items));
-      dispatch(setTotalCountAC(data.totalCount));
-    });
+    const data = await apiFunctions.getUsers(currentPage, pageSize);
+    dispatch(toggleIsFetchingAC(false));
+    dispatch(setUsersAC(data.items));
+    dispatch(setTotalCountAC(data.totalCount));
   };
 };
 
 export const setCurrentPageThunk = (page, pageSize) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(setCurrentPageAC(page));
     dispatch(toggleIsFetchingAC(true));
-    apiFunctions.setCurrentPage(page, pageSize).then((response) => {
-      dispatch(toggleIsFetchingAC(false));
-      dispatch(setUsersAC(response.data.items));
-    });
+    const response = await apiFunctions.setCurrentPage(page, pageSize);
+    dispatch(toggleIsFetchingAC(false));
+    dispatch(setUsersAC(response.data.items));
   };
 };
 
 export const followThunk = (id) => {
-  return (dispatch) => {
-    apiFunctions.follow(id).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(followAC(id));
-      }
-    });
+  return async (dispatch) => {
+    const response = await apiFunctions.follow(id);
+    if (response.data.resultCode === 0) {
+      dispatch(followAC(id));
+    }
   };
 };
 
 export const unfollowThunk = (id) => {
-  return (dispatch) => {
-    apiFunctions.unfollow(id).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(unfollowAC(id));
-      }
-    });
+  return async (dispatch) => {
+    const response = await apiFunctions.unfollow(id);
+    if (response.data.resultCode === 0) {
+      dispatch(unfollowAC(id));
+    }
   };
 };

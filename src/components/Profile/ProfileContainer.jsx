@@ -12,18 +12,19 @@ import {
   setStatusThunk,
 } from '../../redux/profile-reducer';
 import { authUserThunk } from '../../redux/auth-reducer';
-import { withAuthRedirect } from '../../hoc/AuthRedirect';
-import { Preloader } from '../../components/common/Preloader/Preloader';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 export class ProfileContainer extends React.Component {
   componentDidMount() {
-    this.props.authUserThunk();
     this.props.setMyProfileThunk(this.props.auth.id);
     this.props.getStatusThunk(this.props.auth.id);
   }
 
   render() {
+    if (!this.props.auth.isAuth) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className={classes.profileWrapper}>
         <div className={classes.wallpaper}></div>
@@ -51,6 +52,7 @@ const mapStateToProps = (state) => {
     auth: state.auth,
     isFetching: state.auth.isFetching,
     status: state.profilePage.status,
+    initialized: state.app.initialized,
   };
 };
 
@@ -60,8 +62,7 @@ export const ProfileContainerComponent = compose(
     authUserThunk,
     getStatusThunk,
     setStatusThunk,
-  }),
-  withAuthRedirect
+  })
 )(ProfileContainer);
 
 const Avatar = () => {

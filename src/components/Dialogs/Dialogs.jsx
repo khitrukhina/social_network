@@ -1,6 +1,12 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+import { maxLengthCreator, required } from '../../tools/validators/validators';
+import { MessageTextarea } from '../common/Forms/MessageTextarea';
 
 import classes from './Dialogs.module.css';
+
+let maxLength200 = maxLengthCreator(200);
 
 export const Dialogs = (props) => {
   let dialogsItems = props.dialogsPage.dialogs.map((dialog, index) => {
@@ -13,33 +19,42 @@ export const Dialogs = (props) => {
     );
   });
 
-  let newMessage = React.createRef();
-
-  const changeNewMessageText = () => {
-    let newMesageText = newMessage.current.value;
-    props.onChangeNewMessageText(newMesageText);
+  const addMessage = (values) => {
+    console.log(values.newMessage);
+    props.onSendMessage(values.newMessage);
   };
 
-  let sendMessage = () => {
-    props.onSendMessage();
-  };
+  if (!props.isAuth) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div className={classes.dialogsWrapper}>
       <div className={classes.dialogItems}>{dialogsItems}</div>
       <div className={classes.dialogsTextArea}>
-        <textarea
-          ref={newMessage}
-          value={props.dialogsPage.newMessageText}
-          onChange={changeNewMessageText}
-        ></textarea>
-        <button type="button" onClick={sendMessage}>
-          Send message
-        </button>
+        <SendMessageFormRedux onSubmit={addMessage} />
       </div>
       <div className={classes.message}>{messagesItems}</div>
     </div>
   );
 };
+
+const sendMessageForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        placeholder="Your message..."
+        name={'newMessage'}
+        component={MessageTextarea}
+        validate={[required, maxLength200]}
+      ></Field>
+      <button>Send message</button>
+    </form>
+  );
+};
+
+const SendMessageFormRedux = reduxForm({ form: 'sendMessageForm' })(
+  sendMessageForm
+);
 
 const DialogItem = (props) => {
   return (

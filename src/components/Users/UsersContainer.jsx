@@ -14,26 +14,18 @@ class UsersContainerComponent extends React.Component {
     this.props.getUserThunk(this.props.currentPage, this.props.pageSize);
   }
   render() {
-    let pagesCount = 10;
-    // let pagesCount = Math.ceil(
-    //   this.props.totalUsersCount / this.props.pageSize
-    // );
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
-
-    return <Users {...this.props} pages={pages} />;
+    return <Users {...this.props} />;
   }
 }
 
 let mapStateToProps = (state) => {
   return {
+    isFetching: state.usersPage.isFetching,
+    isAuth: state.auth.isAuth,
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
   };
 };
 

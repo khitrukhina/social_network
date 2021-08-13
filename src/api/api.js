@@ -9,12 +9,11 @@ const api = axios.create({
 });
 
 export const apiFunctions = {
-  getUsers: (currentPage = 1, pageSize = 10) => {
-    return api
-      .get(`users?page=${currentPage}&count=${pageSize}`)
-      .then((response) => {
-        return response.data;
-      });
+  getUsers: async (currentPage = 1, pageSize = 10) => {
+    const response = await api.get(
+      `users?page=${currentPage}&count=${pageSize}`
+    );
+    return response.data;
   },
   unfollow: (id) => api.delete(`follow/${id}`),
   follow: (id) => api.post(`follow/${id}`),
@@ -33,12 +32,24 @@ export const apiFunctions = {
   },
   setStatus: (status) => {
     return api.put('profile/status', { status: status }).then((response) => {
-      console.log(response);
       return response;
     });
   },
   getStatus: (id) => {
     return api.get(`profile/status/${id}`).then((response) => {
+      return response;
+    });
+  },
+  login: async (email, password, rememberMe = false) => {
+    const response = await api.post('/auth/login', {
+      email,
+      password,
+      rememberMe,
+    });
+    return response;
+  },
+  logOut: () => {
+    return api.delete('/auth/login').then((response) => {
       return response;
     });
   },

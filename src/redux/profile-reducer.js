@@ -51,7 +51,6 @@ export const profileReducer = (state = initialState, action) => {
       };
 
     case SET_STATUS:
-      debugger;
       return {
         ...state,
         status: action.status,
@@ -88,34 +87,28 @@ const setStatusAC = (status) => ({
   status,
 });
 
-export const setProfileThunk = (id) => (dispatch) => {
+export const setProfileThunk = (id) => async (dispatch) => {
   dispatch(toggleIsFetchingAC(true));
-  apiFunctions.getProfile(id).then((profile) => {
-    dispatch(toggleIsFetchingAC(false));
-    dispatch(setUserProfileAC(profile));
-  });
+  const profile = await apiFunctions.getProfile(id);
+  dispatch(toggleIsFetchingAC(false));
+  dispatch(setUserProfileAC(profile));
 };
 
-export const setMyProfileThunk = (id) => (dispatch) => {
+export const setMyProfileThunk = (id) => async (dispatch) => {
   dispatch(toggleIsFetchingAC(true));
-  apiFunctions.getProfile(id).then((profile) => {
-    dispatch(toggleIsFetchingAC(false));
-    dispatch(setMyProfileAC(profile));
-  });
+  const profile = await apiFunctions.getProfile(id);
+  dispatch(toggleIsFetchingAC(false));
+  dispatch(setMyProfileAC(profile));
 };
 
-export const getStatusThunk = (id) => (dispatch) => {
-  apiFunctions.getStatus(id).then((response) => {
-    console.log(response);
-    dispatch(setStatusAC(response.data));
-  });
+export const getStatusThunk = (id) => async (dispatch) => {
+  const response = await apiFunctions.getStatus(id);
+  dispatch(setStatusAC(response.data));
 };
 
-export const setStatusThunk = (status) => (dispatch) => {
-  console.log(status);
-  apiFunctions.setStatus(status).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(setStatusAC(status));
-    }
-  });
+export const setStatusThunk = (status) => async (dispatch) => {
+  const response = await apiFunctions.setStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setStatusAC(status));
+  }
 };

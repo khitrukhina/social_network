@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Preloader } from '../common/Preloader/Preloader';
 
 const styles = {
   div: {
@@ -26,6 +25,9 @@ const styles = {
 };
 
 export const Header = (props) => {
+  const handleLogOut = () => {
+    props.logOutThunk();
+  };
   return (
     <div style={styles.div}>
       <a href="/" style={styles.a}>
@@ -37,7 +39,10 @@ export const Header = (props) => {
       </a>
       <div style={styles.login}>
         {props.auth.isAuth ? (
-          <span>{props.auth.login} </span>
+          <>
+            <span>{props.auth.login} </span>{' '}
+            <button onClick={handleLogOut}>Log out</button>
+          </>
         ) : (
           <NavLink to="/login">LOGIN</NavLink>
         )}

@@ -1,6 +1,8 @@
 import { dialogsReducer } from './dialogs-reducer';
 import { profileReducer } from './profile-reducer';
 
+//example of working without redux store
+
 export let store = {
   _state: {
     dialogsPage: {
