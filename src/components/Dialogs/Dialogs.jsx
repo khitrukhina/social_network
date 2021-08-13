@@ -20,7 +20,6 @@ export const Dialogs = (props) => {
   });
 
   const addMessage = (values) => {
-    console.log(values.newMessage);
     props.onSendMessage(values.newMessage);
   };
 

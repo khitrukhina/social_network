@@ -10,7 +10,7 @@ export const Login = (props) => {
   };
   return (
     <div className={classes.loginPage}>
-      {props.isFetching || !props.initialized ? (
+      {!props.initialized ? (
         <Preloader className={classes.form__preloader} />
       ) : null}
       {!props.isAuth ? (
