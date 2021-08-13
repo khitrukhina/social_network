@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
+import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 import avatar from './images/ava.png';
 import classes from './Profile.module.css';
 import { PostsContainer } from '../Posts/PostsContainer';
+import { Preloader } from '../common/Preloader/Preloader';
 import {
+  setPhoto,
   setMyProfileThunk,
   getStatusThunk,
   setStatusThunk,
 } from '../../redux/profile-reducer';
 import { authUserThunk } from '../../redux/auth-reducer';
-import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
+import classNames from 'classnames';
 
 export class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -30,7 +34,15 @@ export class ProfileContainer extends React.Component {
         <div className={classes.wallpaper}></div>
         <div className="d-flex m-4">
           <div className={classes.avatar_status}>
-            <Avatar />
+            {this.props.myProfile ? (
+              <Avatar
+                profile={this.props.myProfile}
+                setPhoto={this.props.setPhoto}
+              />
+            ) : (
+              <Preloader />
+            )}
+
             <ProfileStatus
               status={this.props.status}
               getStatusThunk={this.props.getStatusThunk}
@@ -62,13 +74,46 @@ export const ProfileContainerComponent = compose(
     authUserThunk,
     getStatusThunk,
     setStatusThunk,
+    setPhoto,
   })
 )(ProfileContainer);
 
-const Avatar = () => {
+const Avatar = (props) => {
+  const [changeAvatarMode, setAvatarChangeMode] = useState(false);
+  const setPhoto = (e) => {
+    if (e.target.files.length) {
+      props.setPhoto(e.target.files[0]);
+    }
+  };
+
+  const toggleAvatarInput = () => {
+    setAvatarChangeMode(!changeAvatarMode);
+  };
+  const avatarInputStyles = classNames(classes.avatarInputWrapper, {
+    [classes.avatarInputWrapper_visible]: changeAvatarMode,
+  });
   return (
     <div className={classes.avatarWrapper}>
-      <img src={avatar} className={classes.avatar} alt="avatar"></img>
+      <img
+        src={props.profile.photos.large || avatar}
+        className={classes.avatar}
+        alt="avatar"
+        onMouseEnter={toggleAvatarInput}
+        onMouseLeave={toggleAvatarInput}
+      ></img>
+      {props.profile && (
+        <div className={avatarInputStyles}>
+          <label htmlFor="set_photo" className={classes.avatar__inputLabel}>
+            <FontAwesomeIcon icon={faPhotoVideo} />
+          </label>
+          <input
+            type="file"
+            onChange={setPhoto}
+            id="set_photo"
+            className={classes.avatar__input}
+          />
+        </div>
+      )}
     </div>
   );
 };

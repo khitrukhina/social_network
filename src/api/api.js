@@ -53,4 +53,17 @@ export const apiFunctions = {
       return response;
     });
   },
+  setPhoto: (photoFile) => {
+    const formData = new FormData();
+    formData.append('image', photoFile);
+    return api
+      .put('/profile/photo', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        return response;
+      });
+  },
 };

@@ -1,10 +1,16 @@
 
 .avatar {
+    
     width: 100px;
     height: 100px;
     border: 2px dashed rgb(130, 212, 7);
     border-radius: 50px;
     margin-right: 50px;
+}
+
+.avatarWrapper {
+    
+    position: relative;
 }
 
 .avatar_status {
@@ -48,4 +54,23 @@
 .profile__line {
     height: 2px;
     background: rgb(130, 212, 7);
+}
+
+.avatar__input {
+    visibility: hidden;
+}
+
+.avatar__inputLabel {
+    cursor: pointer;
+    position:absolute;
+    top:5px;
+    left:15px;
+}
+
+.avatarInputWrapper {
+    opacity: 0;
+}
+
+.avatarInputWrapper_visible {
+    opacity: 0.8;
 }

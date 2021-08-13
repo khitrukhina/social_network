@@ -4,8 +4,12 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import classes from './Posts.module.css';
 import avatar from './ava.png';
+import { Preloader } from '../common/Preloader/Preloader';
 
 export const Posts = (props) => {
+  if (!props.profilePage.myProfile) {
+    return <Preloader />;
+  }
   return (
     <div className="m-4">
       <div className={classes.posts__title}>MY POSTS</div>
@@ -15,7 +19,14 @@ export const Posts = (props) => {
         changeNewPostText={props.changeNewPostText}
       />
       {props.profilePage.posts.map((post, index) => {
-        return <Post text={post.text} id={post.id} key={index} />;
+        return (
+          <Post
+            text={post.text}
+            id={post.id}
+            key={index}
+            profile={props.profilePage.myProfile}
+          />
+        );
       })}
     </div>
   );
@@ -62,7 +73,11 @@ const Post = (props) => {
   return (
     <div className={classes.postWrapper}>
       <div>
-        <img src={avatar} className={classes.avatar} alt="avatar"></img>
+        <img
+          src={props.profile.photos.small || avatar}
+          className={classes.avatar}
+          alt="avatar"
+        ></img>
       </div>
       <div className={classes.post__text}>
         {props.text}
